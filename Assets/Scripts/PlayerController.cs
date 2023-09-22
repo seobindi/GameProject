@@ -5,15 +5,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] JudgmentManager theJudgmentManager;
-    void Start()
-    {
-        
-    }
+
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            theJudgmentManager.CheckTiming();
-        }
+        KeyAssignment();
+    }
+
+    private void KeyAssignment()
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow)) { theJudgmentManager.CheckTiming("Up"); }
+        else if (Input.GetKeyDown(KeyCode.DownArrow)) { theJudgmentManager.CheckTiming("Down"); }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)) { theJudgmentManager.CheckTiming("Left"); }
+        else if (Input.GetKeyDown(KeyCode.RightArrow)) { theJudgmentManager.CheckTiming("Right"); }
     }
 }
+
+

@@ -7,26 +7,20 @@ public class JudgmentManager : MonoBehaviour
     public List<GameObject> NoteList = new List<GameObject>(); // 생성 노트 리스트
 
     [SerializeField] Transform center = null; // 판정 중심
-    [SerializeField] Transform[] judgmentRect = null; // 판정범위
+    [SerializeField] Transform[] judgmentRange = null; // 판정범위
     Vector2[] judgmentBoxs = null; // 판정 범위 최소값 x, 최대값 y
-
     void Start()
     {
-        judgmentBoxs = new Vector2[judgmentRect.Length];
+        judgmentBoxs = new Vector2[judgmentRange.Length];
 
-        for (int i = 0; i < judgmentRect.Length; i++)
+        for (int i = 0; i < judgmentRange.Length; i++)
         {
-            judgmentBoxs[i].Set(center.localPosition.x - judgmentRect[i].localScale.x / 2,
-                                center.localPosition.x + judgmentRect[i].localScale.x / 2);
+            judgmentBoxs[i].Set(center.localPosition.x - judgmentRange[i].localScale.x / 2,
+                                center.localPosition.x + judgmentRange[i].localScale.x / 2);
         }
     }
 
-    void Update()
-    {
-        
-    }
-
-    public void CheckTiming()
+    public void CheckTiming(string keyTag)
     {
         for (int i = 0; i < NoteList.Count; i++)
         {
@@ -34,17 +28,17 @@ public class JudgmentManager : MonoBehaviour
 
             for (int j = 0; j < judgmentBoxs.Length; j++)
             {
-                if (judgmentBoxs[j].x <= notePosX && notePosX <= judgmentBoxs[j].y)
+                if (NoteList[i].gameObject.tag == keyTag && 
+                           judgmentBoxs[j].x <= notePosX && notePosX <= judgmentBoxs[j].y)
                 {
-                    Destroy(NoteList[i].gameObject);
-                    NoteList.Remove(NoteList[i]);
+                    NoteList.RemoveAt(i);
                     switch (j)
                     {
                         case 0:
                             Debug.Log("Perfect");
                             break;
                         case 1:
-                            Debug.Log("Cool");
+                            Debug.Log("Great");
                             break;
                         case 2:
                             Debug.Log("Good");
@@ -57,6 +51,6 @@ public class JudgmentManager : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Miss");
+        Debug.Log("Dead");
     }
 }

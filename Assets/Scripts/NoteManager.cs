@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class NoteManager : MonoBehaviour
 {
+    [SerializeField] JudgmentManager theJudgmentManager;
+
     [SerializeField] private Transform noteStartLocation = null;
     [SerializeField] private Transform noteEndLocation = null;
     [SerializeField] private GameObject[] notePattern = null;
     private Transform[] noteObjects = null;
+    private string[] keyTag = { "Up", "Down", "Left", "Right" };
+
     [SerializeField] private float noteSpeed = 0;
 
-    [SerializeField] JudgmentManager theJudgmentManager;
-
     private Transform currentPattern;
-
 
     void Start()
     {
@@ -47,6 +48,7 @@ public class NoteManager : MonoBehaviour
         {
             if (noteObject != currentPattern.transform) // 부모 자체는 제외
             {
+                noteObject.gameObject.tag = keyTag[Random.Range(0, keyTag.Length)];
                 theJudgmentManager.NoteList.Add(noteObject.gameObject);
             }
         }
