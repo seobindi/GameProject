@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class NoteManager : MonoBehaviour
 {
-    [SerializeField] JudgmentManager theJudgmentManager;
-
     [SerializeField] private Transform noteStartLocation = null;
     [SerializeField] private Transform noteEndLocation = null;
     [SerializeField] private GameObject[] notePattern = null;
     private Transform[] noteObjects = null;
     private string[] keyTag = { "Up", "Down", "Left", "Right" };
 
+    [SerializeField] private Transform currentPattern = null;
     [SerializeField] private float noteSpeed = 0;
 
-    private Transform currentPattern;
+
 
     void Start()
     {
@@ -26,15 +25,15 @@ public class NoteManager : MonoBehaviour
 
         if (transform.position.x >= noteEndLocation.position.x)
         {
-            transform.position = noteStartLocation.position;
-            theJudgmentManager.NoteList.Clear();
-            Destroy(currentPattern.gameObject); // 이전 노트 패턴 파괴
             RandomNotePattern(); // 새로운 노트 패턴 할당
         }
     }
-
-    void RandomNotePattern()
+    public void RandomNotePattern()
     {
+        
+        GameManager.Instance.NoteList.Clear();
+        Destroy(currentPattern.gameObject); // 이전 노트 패턴 파괴
+        
         int randomIndex = Random.Range(0, notePattern.Length);
         GameObject selectedPattern = notePattern[randomIndex];
 
@@ -49,8 +48,10 @@ public class NoteManager : MonoBehaviour
             if (noteObject != currentPattern.transform) // 부모 자체는 제외
             {
                 noteObject.gameObject.tag = keyTag[Random.Range(0, keyTag.Length)];
-                theJudgmentManager.NoteList.Add(noteObject.gameObject);
+                GameManager.Instance.NoteList.Add(noteObject.gameObject);
             }
         }
+
+        transform.position = noteStartLocation.position;
     }
 }
