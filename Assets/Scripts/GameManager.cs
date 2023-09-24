@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform center = null; // 판정 중심
     [SerializeField] Transform[] judgmentRange = null; // 판정범위
     Vector2[] judgmentBoxs = null; // 판정 범위 최소값 x, 최대값 y
-    void Awake()
+    void Awake() // 싱글톤 작업
     {
         if(instance == null)
         {
@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static GameManager Instance
+    public static GameManager Instance // 싱글톤 작업
     {
         get
         {
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
             }
             return instance;
         }
-    } // 싱글톤 작업
+    } 
 
     public int CheckTiming(string keyTag)
     {

@@ -9,6 +9,7 @@ TagManager:
   - Down
   - Left
   - Right
+  - Hit
   layers:
   - Default
   - TransparentFX

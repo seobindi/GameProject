@@ -30,19 +30,19 @@ public class NoteManager : MonoBehaviour
     }
     public void RandomNotePattern()
     {
-        
         GameManager.Instance.NoteList.Clear();
         Destroy(currentPattern.gameObject); // 이전 노트 패턴 파괴
         
-        int randomIndex = Random.Range(0, notePattern.Length);
-        GameObject selectedPattern = notePattern[randomIndex];
+        int randomIndex = Random.Range(0, notePattern.Length); // + 최적화 필요 로직
+        GameObject selectedPattern = notePattern[randomIndex]; // + 최적화 필요 로직
 
         // 현재위치에 노트 패턴을 생성하고 부모로 할당
         currentPattern = Instantiate(selectedPattern, transform.position, Quaternion.identity).transform;
         currentPattern.SetParent(transform);
 
-        // 각 노트를 노트 리스트에 할당
         noteObjects = currentPattern.GetComponentsInChildren<Transform>();
+
+        // 각 노트를 태그 셋팅 후 노트 리스트에 할당
         foreach (Transform noteObject in noteObjects)
         {
             if (noteObject != currentPattern.transform) // 부모 자체는 제외
