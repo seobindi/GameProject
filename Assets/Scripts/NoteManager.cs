@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NoteManager : MonoBehaviour
 {
+    [SerializeField] private MonsterController theMonsterController = null;
+
     [SerializeField] private Transform noteStartLocation = null;
     [SerializeField] private Transform noteEndLocation = null;
     [SerializeField] private GameObject[] notePattern = null;
@@ -12,9 +14,6 @@ public class NoteManager : MonoBehaviour
 
     [SerializeField] private Transform currentPattern = null;
     [SerializeField] private float noteSpeed = 0;
-
-
-
     void Start()
     {
         RandomNotePattern();
@@ -47,11 +46,13 @@ public class NoteManager : MonoBehaviour
         {
             if (noteObject != currentPattern.transform) // 부모 자체는 제외
             {
-                noteObject.gameObject.tag = keyTag[Random.Range(0, keyTag.Length)];
+                if (noteObject.gameObject.tag == "Note") { noteObject.gameObject.tag = keyTag[Random.Range(0, keyTag.Length)]; }
                 GameManager.Instance.NoteList.Add(noteObject.gameObject);
             }
         }
 
         transform.position = noteStartLocation.position;
+
+        theMonsterController.MonsterSpawn();
     }
 }

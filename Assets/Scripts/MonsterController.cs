@@ -6,9 +6,13 @@ public class MonsterController : MonoBehaviour
 {
     [SerializeField] private Transform monster = null;
     [SerializeField] private Transform player = null;
-    [SerializeField] private GameObject[] monsterPrefab = null;
+    [SerializeField] private GameObject[] normalMonsterPrefab = null;
+    [SerializeField] private GameObject[] bossMonsterPrefab = null;
     [SerializeField] private Transform currentMonster = null;
     [SerializeField] private float moveDistance = 2f;
+    private int monsterKillCount = 0;
+
+    Vector3 moveDirection = Vector3.left; // 좌, 우 반복 몬스터 방향설정( 임시 )
 
     private void OnTriggerEnter2D(Collider2D collision) // 몬스터 애니메이션 재생
     {
@@ -32,14 +36,22 @@ public class MonsterController : MonoBehaviour
 
     public void MonsterSpawn() // 몬스터 스폰
     {
+        monsterKillCount++;
         Destroy(currentMonster.gameObject); // 이전 몬스터 파괴
 
-        currentMonster = Instantiate(monsterPrefab[Random.Range(0, monsterPrefab.Length)], monster.transform.position, Quaternion.identity).transform; // 몬스터 프리팹 랜덤 스폰
+        if (monsterKillCount % 10 < 3)
+        {
+
+        }
+        
+        currentMonster = Instantiate(normalMonsterPrefab[Random.Range(0, normalMonsterPrefab.Length)], monster.transform.position, Quaternion.identity).transform; // 몬스터 프리팹 랜덤 스폰
         currentMonster.SetParent(monster.transform); // 부모 설정
 
         monster.transform.position = player.position;
-        int randomDirection = Random.Range(0, 2);
-        Vector3 moveDirection = randomDirection == 0 ? Vector3.right : Vector3.left;
-        monster.Translate(moveDirection * ((GameManager.Instance.NoteList.Count-1) * (moveDistance)));
+        if (moveDirection == Vector3.left) { moveDirection = Vector3.right; }
+        else                               { moveDirection = Vector3.left; }
+        //int randomDirection = Random.Range(0, 2);
+        //Vector3 moveDirection = randomDirection == 0 ? Vector3.right : Vector3.left;
+        monster.Translate(moveDirection * ((GameManager.Instance.NoteList.Count) * (moveDistance)));
     }
 }

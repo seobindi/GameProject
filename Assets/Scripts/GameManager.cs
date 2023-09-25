@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < judgmentBoxs.Length; i++) // 모든 판정박스 체크
             {
                 if (judgmentBoxs[i].x <= notePosX && notePosX <= judgmentBoxs[i].y) // 판정 범위에 속해있는지 체크
-                {
+                {   
                     NoteList.RemoveAt(0);
                     switch (i)
                     {
@@ -70,7 +70,8 @@ public class GameManager : MonoBehaviour
                             Debug.Log("Bad");
                             break;
                     }
-                    return 1;
+                    if (keyTag != "Hit") { return 1; }
+                    else                 { return 3; }
                 }
             }
             Debug.Log("Judge Miss");
