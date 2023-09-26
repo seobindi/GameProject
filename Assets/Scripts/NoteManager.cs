@@ -8,9 +8,11 @@ public class NoteManager : MonoBehaviour
 
     [SerializeField] private Transform noteStartLocation = null;
     [SerializeField] private Transform noteEndLocation = null;
-    [SerializeField] private GameObject[] notePattern = null;
+    [SerializeField] private GameObject[] normalNotePattern = null;
+    [SerializeField] private GameObject[] bossNotePattern = null;
     private Transform[] noteObjects = null;
     private string[] keyTag = { "Up", "Down", "Left", "Right" };
+    private string monsterType = "Normal";
 
     [SerializeField] private Transform currentPattern = null;
     [SerializeField] private float noteSpeed = 0;
@@ -31,9 +33,21 @@ public class NoteManager : MonoBehaviour
     {
         GameManager.Instance.NoteList.Clear();
         Destroy(currentPattern.gameObject); // 이전 노트 패턴 파괴
-        
-        int randomIndex = Random.Range(0, notePattern.Length); // + 최적화 필요 로직
-        GameObject selectedPattern = notePattern[randomIndex]; // + 최적화 필요 로직
+
+        GameObject selectedPattern = null;
+
+        if (/*GameManager.Instance.monsterKillCount > 10 &&*/ (GameManager.Instance.monsterKillCount % 10) < 3)
+        {
+            monsterType = "Boss";
+            int randomIndex = Random.Range(0, bossNotePattern.Length); // + 최적화 필요 로직
+            selectedPattern = bossNotePattern[randomIndex]; // + 최적화 필요 로직
+        }
+        else
+        {
+            monsterType = "Normal";
+            int randomIndex = Random.Range(0, normalNotePattern.Length); // + 최적화 필요 로직
+            selectedPattern = normalNotePattern[randomIndex]; // + 최적화 필요 로직
+        }
 
         // 현재위치에 노트 패턴을 생성하고 부모로 할당
         currentPattern = Instantiate(selectedPattern, transform.position, Quaternion.identity).transform;
@@ -53,6 +67,6 @@ public class NoteManager : MonoBehaviour
 
         transform.position = noteStartLocation.position;
 
-        theMonsterController.MonsterSpawn();
+        theMonsterController.MonsterSpawn(monsterType);
     }
 }

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform center = null; // 판정 중심
     [SerializeField] Transform[] judgmentRange = null; // 판정범위
     Vector2[] judgmentBoxs = null; // 판정 범위 최소값 x, 최대값 y
+    public int monsterKillCount = 0;
     void Awake() // 싱글톤 작업
     {
         if(instance == null)
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < judgmentBoxs.Length; i++) // 모든 판정박스 체크
             {
                 if (judgmentBoxs[i].x <= notePosX && notePosX <= judgmentBoxs[i].y) // 판정 범위에 속해있는지 체크
-                {   
+                {
                     NoteList.RemoveAt(0);
                     switch (i)
                     {

@@ -27,7 +27,6 @@ public class CameraManager : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, Target.position, Time.deltaTime * CameraSpeed);
         }
-
     }
 
     public void ShakeCamera()

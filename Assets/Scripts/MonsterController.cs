@@ -10,7 +10,6 @@ public class MonsterController : MonoBehaviour
     [SerializeField] private GameObject[] bossMonsterPrefab = null;
     [SerializeField] private Transform currentMonster = null;
     [SerializeField] private float moveDistance = 2f;
-    private int monsterKillCount = 0;
 
     Vector3 moveDirection = Vector3.left; // 좌, 우 반복 몬스터 방향설정( 임시 )
 
@@ -34,17 +33,21 @@ public class MonsterController : MonoBehaviour
         }
     }
 
-    public void MonsterSpawn() // 몬스터 스폰
+    public void MonsterSpawn(string monsterType) // 몬스터 스폰
     {
-        monsterKillCount++;
-        Destroy(currentMonster.gameObject); // 이전 몬스터 파괴
-
-        if (monsterKillCount % 10 < 3)
+        if (monsterType == "Boss")
         {
-
+            Destroy(currentMonster.gameObject); // 이전 몬스터 파괴
+            currentMonster = Instantiate(bossMonsterPrefab[Random.Range(0, bossMonsterPrefab.Length)],
+                                            monster.transform.position, Quaternion.identity).transform; // 보스 몬스터 랜덤 스폰
+        }
+        else
+        {
+            Destroy(currentMonster.gameObject); // 이전 몬스터 파괴
+            currentMonster = Instantiate(normalMonsterPrefab[Random.Range(0, normalMonsterPrefab.Length)], 
+                                            monster.transform.position, Quaternion.identity).transform; // 일반 몬스터 랜덤 스폰
         }
         
-        currentMonster = Instantiate(normalMonsterPrefab[Random.Range(0, normalMonsterPrefab.Length)], monster.transform.position, Quaternion.identity).transform; // 몬스터 프리팹 랜덤 스폰
         currentMonster.SetParent(monster.transform); // 부모 설정
 
         monster.transform.position = player.position;
