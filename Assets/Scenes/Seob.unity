@@ -1461,7 +1461,9 @@ MonoBehaviour:
   Target: {fileID: 180100018}
   CameraSpeed: 2
   shakeDuration: 0.1
-  shakeSpeed: 0.2
+  shakeSpeed: 0.1
+  bpm: 120
+  currentTime: 0
 --- !u!1 &631187158
 GameObject:
   m_ObjectHideFlags: 0
