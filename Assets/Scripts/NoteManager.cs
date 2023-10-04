@@ -34,9 +34,9 @@ public class NoteManager : MonoBehaviour
         GameManager.Instance.NoteList.Clear();
         Destroy(currentPattern.gameObject); // 이전 노트 패턴 파괴
 
-        GameObject selectedPattern = null;
+        GameObject selectedPattern;
 
-        if (/*GameManager.Instance.monsterKillCount > 10 &&*/ (GameManager.Instance.monsterKillCount % 10) < 3)
+        if (GameManager.Instance.monsterKillCount > 10 && (GameManager.Instance.monsterKillCount % 10) < 3)
         {
             monsterType = "Boss";
             int randomIndex = Random.Range(0, bossNotePattern.Length); // + 최적화 필요 로직

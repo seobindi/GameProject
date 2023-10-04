@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Transform monster = null;
     [SerializeField] private NoteManager theNoteManager = null;
     [SerializeField] private CameraManager theCameraManager = null;
     //[SerializeField] private AudioManager theAudioManager = null;
+
+    [SerializeField] private Transform monster = null;
     [SerializeField] private float moveDistance = 2;
     private Vector3 moveDirection;
 
@@ -19,15 +20,14 @@ public class PlayerController : MonoBehaviour
     private void KeyInput() // 키 입력
     {
         // + 각각 키에 해당하는 애니메이션 로직 추가
-        if (Input.GetKeyDown(KeyCode.UpArrow)) { Attack(GameManager.Instance.CheckTiming("Up")); }
-        else if (Input.GetKeyDown(KeyCode.DownArrow)) { Attack(GameManager.Instance.CheckTiming("Down")); }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow)) { Attack(GameManager.Instance.CheckTiming("Left")); }
-        else if (Input.GetKeyDown(KeyCode.RightArrow)) { Attack(GameManager.Instance.CheckTiming("Right")); }
-        else if (Input.GetKeyDown(KeyCode.Space)) { Attack(GameManager.Instance.CheckTiming("Hit")); }
+        if (Input.GetKeyDown(KeyCode.UpArrow)) { Attack(GameManager.Instance.CheckTiming("Up")); /*theAudioManager.PlaySFX("");*/ }
+        else if (Input.GetKeyDown(KeyCode.DownArrow)) { Attack(GameManager.Instance.CheckTiming("Down")); /*theAudioManager.PlaySFX("");*/}
+        else if (Input.GetKeyDown(KeyCode.LeftArrow)) { Attack(GameManager.Instance.CheckTiming("Left")); /*theAudioManager.PlaySFX("");*/}
+        else if (Input.GetKeyDown(KeyCode.RightArrow)) { Attack(GameManager.Instance.CheckTiming("Right")); /*theAudioManager.PlaySFX("");*/}
+        else if (Input.GetKeyDown(KeyCode.Space)) { Attack(GameManager.Instance.CheckTiming("Hit")); /*theAudioManager.PlaySFX("");*/}
     }
     private void Attack(int judge)
     {
-
         if (judge == 1) // 몬스터 피격
         {
             Debug.Log("Hit!!");
@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
             theNoteManager.RandomNotePattern(); // 적을 처치 시 몬스터 재스폰
         }
         theCameraManager.ShakeCamera();
-        //theAudioManager.PlaySFX(""); // 효과음 실행
     }
 
     private void LoseLife()

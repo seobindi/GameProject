@@ -304,9 +304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973eb90fc6566594db3319f335c35856, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 2023662880}
   theNoteManager: {fileID: 935714973}
   theCameraManager: {fileID: 575902152}
+  monster: {fileID: 2023662880}
   moveDistance: 2
 --- !u!1 &184798622
 GameObject:
@@ -1092,6 +1092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7427e8d628df744a8aaf4045481be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  theCameraManager: {fileID: 575902152}
   monster: {fileID: 2023662880}
   player: {fileID: 180100018}
   normalMonsterPrefab:
@@ -1459,11 +1460,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 180100018}
-  CameraSpeed: 2
+  mainCamera: {fileID: 575902150}
+  cameraSpeed: 3
   shakeDuration: 0.1
   shakeSpeed: 0.1
+  yOffset: 1
   bpm: 120
-  currentTime: 0
+  bossMode: 0
 --- !u!1 &631187158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2562,7 +2565,7 @@ MonoBehaviour:
   bossNotePattern:
   - {fileID: 25633333513340760, guid: 4e4f96f910b38bb4693e9368f9861e5f, type: 3}
   currentPattern: {fileID: 756029271}
-  noteSpeed: 4
+  noteSpeed: 2
 --- !u!1 &935894133
 GameObject:
   m_ObjectHideFlags: 0

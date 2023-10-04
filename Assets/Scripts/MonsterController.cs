@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
+    [SerializeField] private CameraManager theCameraManager = null;
+    //[SerializeField] private AudioManager theAudioManager = null;
+
     [SerializeField] private Transform monster = null;
     [SerializeField] private Transform player = null;
     [SerializeField] private GameObject[] normalMonsterPrefab = null;
@@ -17,19 +20,27 @@ public class MonsterController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Up")
         {
+            /*theAudioManager.PlaySFX("");*/
             Debug.Log("Up Animation onTrigger!!");
         }
         else if (collision.gameObject.tag == "Down")
         {
+            /*theAudioManager.PlaySFX("");*/
             Debug.Log("Down Animation onTrigger!!");
         }
         else if (collision.gameObject.tag == "Left")
         {
+            /*theAudioManager.PlaySFX("");*/
             Debug.Log("Left Animation onTrigger!!");
         }
         else if (collision.gameObject.tag == "Right")
         {
+            /*theAudioManager.PlaySFX("");*/
             Debug.Log("Right Animation onTrigger!!");
+        }
+        else if (collision.gameObject.tag == "Hit")
+        {
+            Debug.Log("-------------------------------");
         }
     }
 
@@ -40,12 +51,14 @@ public class MonsterController : MonoBehaviour
             Destroy(currentMonster.gameObject); // 이전 몬스터 파괴
             currentMonster = Instantiate(bossMonsterPrefab[Random.Range(0, bossMonsterPrefab.Length)],
                                             monster.transform.position, Quaternion.identity).transform; // 보스 몬스터 랜덤 스폰
+            theCameraManager.bossMode = true;
         }
         else
         {
             Destroy(currentMonster.gameObject); // 이전 몬스터 파괴
             currentMonster = Instantiate(normalMonsterPrefab[Random.Range(0, normalMonsterPrefab.Length)], 
                                             monster.transform.position, Quaternion.identity).transform; // 일반 몬스터 랜덤 스폰
+            theCameraManager.bossMode = false;
         }
         
         currentMonster.SetParent(monster.transform); // 부모 설정

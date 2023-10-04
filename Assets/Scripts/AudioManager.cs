@@ -15,7 +15,6 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] Sound[] sfx = null;
     [SerializeField] Sound[] bgm = null;
-
     [SerializeField] AudioSource bgmPlayer = null;
     [SerializeField] AudioSource[] sfxPlayer = null;
 
