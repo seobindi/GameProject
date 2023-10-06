@@ -22,7 +22,10 @@ public class AudioManager : MonoBehaviour
     //{
     //    instance = this;
     //}
-
+    public void SetMusicVolume(float volume)
+    {
+        bgmPlayer.volume = volume;
+    }
     public void PlayBGM(string bgmName)
     {
         for (int i = 0; i < bgm.Length; i++)
