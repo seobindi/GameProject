@@ -1974,7 +1974,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 787576397}
         m_TargetAssemblyTypeName: mainmenu, Assembly-CSharp
-        m_MethodName: OnclickShop
+        m_MethodName: OnclickShopButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
