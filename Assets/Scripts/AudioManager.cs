@@ -11,6 +11,11 @@ public class Sound
 
 public class AudioManager : MonoBehaviour
 {
+    private void Start()
+    {
+        
+    }
+
     //public static AudioManager instance; // 싱글톤으로 할지 후에 결정
 
     [SerializeField] Sound[] sfx = null;
