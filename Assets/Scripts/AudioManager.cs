@@ -42,7 +42,6 @@ public class AudioManager : MonoBehaviour
             }
         }
     }
-
     public void StopBGM()
     {
         bgmPlayer.Stop();
