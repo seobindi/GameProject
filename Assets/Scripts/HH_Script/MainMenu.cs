@@ -18,9 +18,9 @@ public class mainmenu : MonoBehaviour
     {
 
     }
-    public void OnclickShop()
+    public void OnclickOpeningScene()
     {
-        Debug.Log("ªÛ¡°");
+        LoadingSceneManager.LoadScene("Opening");
     }
     public void OnclickGamestart()
     {
