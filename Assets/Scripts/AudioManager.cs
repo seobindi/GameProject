@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] Sound[] sfx = null;
     [SerializeField] Sound[] bgm = null;
     [SerializeField] AudioSource bgmPlayer = null;
-    [SerializeField] AudioSource[] sfxPlayer = null;
+    [SerializeField] AudioSource sfxPlayer = null;
 
     //private void Awake()
     //{
@@ -46,17 +46,19 @@ public class AudioManager : MonoBehaviour
         {
             if (sfxName == sfx[i].name)
             {
-                for (int j = 0; j < sfxPlayer.Length; j++)
+                if (!sfxPlayer.isPlaying)
                 {
-                    if (!sfxPlayer[j].isPlaying)
-                    {
-                        sfxPlayer[j].clip = sfx[i].clip;
-                        sfxPlayer[j].Play();
-                        return;
-                    }
+                    sfxPlayer.clip = sfx[i].clip;
+                    sfxPlayer.Play();
+                    return;
                 }
-                Debug.Log("All audio is in use.");
-                return;
+                else
+                {
+                    sfxPlayer.Stop();
+                    sfxPlayer.clip = sfx[i].clip;
+                    sfxPlayer.Play();
+                    return;
+                }
             }
         }
         Debug.Log("The name could not be found.");

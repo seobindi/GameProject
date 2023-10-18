@@ -12,17 +12,19 @@ public class NoteManager : MonoBehaviour
     [SerializeField] private GameObject[] bossNotePattern = null;
     private Transform[] noteObjects = null;
     private string[] keyTag = { "Up", "Down", "Left", "Right" };
-    private string monsterType = "Normal";
+    public string monsterType = "Normal";
 
     [SerializeField] private Transform currentPattern = null;
     [SerializeField] private float noteSpeed = 0;
+
+    public bool Note = true;
     void Start()
     {
         RandomNotePattern();
     }
     void Update()
     {
-        transform.position += Vector3.right * noteSpeed * Time.deltaTime; // 노트 오른쪽으로 이동
+        if (Note) { transform.position += Vector3.right * noteSpeed * Time.deltaTime; } // 노트 오른쪽으로 이동
 
         if (transform.position.x >= noteEndLocation.position.x)
         {

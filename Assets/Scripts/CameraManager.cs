@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraManager : MonoBehaviour
 {
@@ -8,13 +9,17 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private float cameraSpeed = 0.0f;
     [SerializeField] private float shakeDuration = 0.1f; // 흔들림 지속 시간
-    [SerializeField] private float shakeSpeed = 0.5f; // 흔들림의 세기
+    [SerializeField] private float shakeSpeed = 0.1f; // 흔들림의 세기
     [SerializeField] private float yOffset = 0.0f;
     [SerializeField] private int bpm = 0;
     private double currentTime = 0d;
-    private float nowShakeDuration = 0.0f;
     public bool bossMode = false;
     private Vector3 targetPosition;
+    public GameObject lineUI;
+    public GameObject line2UI;
+    public GameObject line3UI;
+    public GameObject line4UI;
+    [SerializeField] private Animator anim;
 
     //카메라 움직임
     void Update()
@@ -37,25 +42,55 @@ public class CameraManager : MonoBehaviour
 
         if (currentTime >= 60d / bpm) // 60/bpm = 한 비트당 시간 (120bpm이라면 한 비트당 소요 시간은 0.5초)
         {
-            ShakeCamera();
+            if (!Input.anyKeyDown)
+            {
+                anim.SetTrigger("Beat");
+                ShakeCamera(shakeDuration, shakeSpeed, 1);
+            }
             currentTime -= 60d / bpm;
         }
 
         //카메라 흔들림
-        if (nowShakeDuration > 0)
-        {
-            Vector3 shakeOffset = Random.insideUnitSphere * shakeSpeed; // 랜덤한 위치 벡터 생성
-            transform.localPosition = transform.position + shakeOffset; // 흔들림 효과로 카메라 위치 이동
-            nowShakeDuration -= Time.deltaTime; // 흔들림 지속 시간 감소
-        }
+        //if (nowShakeDuration > 0)
+        //{
+        //    Vector3 shakeOffset = Random.insideUnitSphere * shakeSpeed; // 랜덤한 위치 벡터 생성
+        //    transform.localPosition = transform.position + shakeOffset; // 흔들림 효과로 카메라 위치 이동
+        //    nowShakeDuration -= Time.deltaTime; // 흔들림 지속 시간 감소
+        //}
         //else
         //{
         //    transform.position = Vector3.Lerp(transform.position, Target.position, Time.deltaTime * CameraSpeed); // 이동 후 이동
         //}
     }
 
-    public void ShakeCamera()
+    public void ShakeCamera(float duration, float strength, int caller)
     {
-        nowShakeDuration = shakeDuration;
+        
+        transform.DOShakePosition(duration, new Vector3(strength, strength, 0), 20, 90, false)
+            .OnStart(() => {
+                if(caller == 1)
+                {
+                    lineUI.SetActive(true); // 테두리 UI 활성화
+                }
+                else if(caller == 0)
+                    line2UI.SetActive(true);
+                else if (caller == 3)
+                {
+                    line3UI.SetActive(true);
+                }
+                else if (caller == 4)
+                    line4UI.SetActive(true);
+            })
+            .OnComplete(() => {
+                // 흔들림 애니메이션 종료 시 실행할 로직
+                if (caller == 1)
+                    lineUI.SetActive(false);
+                else if (caller == 0)
+                    line2UI.SetActive(false); // 테두리 UI 비활성화
+                else if (caller == 3)
+                    line3UI.SetActive(false);
+                else if (caller == 4)
+                    line4UI.SetActive(false);
+            });
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class MonsterController : MonoBehaviour
 {
@@ -16,32 +17,43 @@ public class MonsterController : MonoBehaviour
 
     Vector3 moveDirection = Vector3.left; // 좌, 우 반복 몬스터 방향설정( 임시 )
 
+    [SerializeField] private Animator anim;
+
     private void OnTriggerEnter2D(Collider2D collision) // 몬스터 애니메이션 재생
     {
-        if (collision.gameObject.tag == "Up")
-        {
-            /*theAudioManager.PlaySFX("");*/
-            Debug.Log("Up Animation onTrigger!!");
-        }
-        else if (collision.gameObject.tag == "Down")
-        {
-            /*theAudioManager.PlaySFX("");*/
-            Debug.Log("Down Animation onTrigger!!");
-        }
-        else if (collision.gameObject.tag == "Left")
-        {
-            /*theAudioManager.PlaySFX("");*/
-            Debug.Log("Left Animation onTrigger!!");
-        }
-        else if (collision.gameObject.tag == "Right")
-        {
-            /*theAudioManager.PlaySFX("");*/
-            Debug.Log("Right Animation onTrigger!!");
-        }
-        else if (collision.gameObject.tag == "Hit")
-        {
-            Debug.Log("-------------------------------");
-        }
+            if (collision.gameObject.tag == "Up")
+            {
+                //theCameraManager.ShakeCamera(0.1f, 0.1f, 1);
+                /*theAudioManager.PlaySFX("");*/
+                anim.SetTrigger("Up");
+                Debug.Log("Up Animation onTrigger!!");
+            }
+            else if (collision.gameObject.tag == "Down")
+            {
+                //theCameraManager.ShakeCamera(0.1f, 0.1f, 1);
+                /*theAudioManager.PlaySFX("");*/
+                anim.SetTrigger("Down");
+                Debug.Log("Down Animation onTrigger!!");
+            }
+            else if (collision.gameObject.tag == "Left")
+            {
+                //theCameraManager.ShakeCamera(0.1f, 0.1f, 1);
+                /*theAudioManager.PlaySFX("");*/
+                anim.SetTrigger("Left");
+                Debug.Log("Left Animation onTrigger!!");
+            }
+            else if (collision.gameObject.tag == "Right")
+            {
+                //theCameraManager.ShakeCamera(0.1f, 0.1f, 1);
+                /*theAudioManager.PlaySFX("");*/
+                anim.SetTrigger("Right");
+                Debug.Log("Right Animation onTrigger!!");
+            }
+            else if (collision.gameObject.tag == "Hit")
+            {
+                //theCameraManager.ShakeCamera(0.1f, 0.1f, 3);
+                Debug.Log("-------------------------------");
+            }
     }
 
     public void MonsterSpawn(string monsterType) // 몬스터 스폰
@@ -62,10 +74,13 @@ public class MonsterController : MonoBehaviour
         }
         
         currentMonster.SetParent(monster.transform); // 부모 설정
-
         monster.transform.position = player.position;
-        if (moveDirection == Vector3.left) { moveDirection = Vector3.right; }
-        else                               { moveDirection = Vector3.left; }
+
+        SpriteRenderer spriteRenderer = currentMonster.GetComponent<SpriteRenderer>();
+        anim = currentMonster.GetComponent<Animator>();
+
+        if (moveDirection == Vector3.left) { moveDirection = Vector3.right; spriteRenderer.flipX = false; }
+        else                               { moveDirection = Vector3.left; spriteRenderer.flipX = true; }
         //int randomDirection = Random.Range(0, 2);
         //Vector3 moveDirection = randomDirection == 0 ? Vector3.right : Vector3.left;
         monster.Translate(moveDirection * ((GameManager.Instance.NoteList.Count) * (moveDistance)));
