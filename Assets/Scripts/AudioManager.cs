@@ -22,10 +22,7 @@ public class AudioManager : MonoBehaviour
     //{
     //    instance = this;
     //}
-    private void Start()
-    {
-        PlayBGM("80BPM"); // BGM 실행
-    }
+
     public void PlayBGM(string bgmName)
     {
         for (int i = 0; i < bgm.Length; i++)
@@ -51,10 +48,6 @@ public class AudioManager : MonoBehaviour
             {
                 for (int j = 0; j < sfxPlayer.Length; j++)
                 {
-<<<<<<< Updated upstream
-=======
-                    // SFXPlayer에서 재생 중이지 않은 Audio Source를 발견했다면 
->>>>>>> Stashed changes
                     if (!sfxPlayer[j].isPlaying)
                     {
                         sfxPlayer[j].clip = sfx[i].clip;
@@ -62,30 +55,13 @@ public class AudioManager : MonoBehaviour
                         return;
                     }
                 }
-<<<<<<< Updated upstream
                 Debug.Log("All audio is in use.");
                 return;
-=======
-                Debug.Log("모든 오디오 플레이어가 재생중입니다.");
-                return;
-
-                //if (!sfxPlayer.isPlaying)
-                //{
-                //    sfxPlayer.clip = sfx[i].clip;
-                //    sfxPlayer.Play();
-                //    return;
-                //}
-                //else
-                //{
-                //    sfxPlayer.Stop();
-                //    sfxPlayer.clip = sfx[i].clip;
-                //    sfxPlayer.Play();
-                //    return;
-                //}
->>>>>>> Stashed changes
             }
         }
         Debug.Log("The name could not be found.");
         return;
     }
+
+    //AudioManager.instance.PlayBGM("BGM0"); // BGM 실행
 }

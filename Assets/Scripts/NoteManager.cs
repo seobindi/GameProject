@@ -8,23 +8,14 @@ public class NoteManager : MonoBehaviour
 
     [SerializeField] private Transform noteStartLocation = null;
     [SerializeField] private Transform noteEndLocation = null;
-    [SerializeField] private Transform turnStartLocation = null;
     [SerializeField] private GameObject[] normalNotePattern = null;
     [SerializeField] private GameObject[] bossNotePattern = null;
-
     private Transform[] noteObjects = null;
     private string[] keyTag = { "Up", "Down", "Left", "Right" };
     private string monsterType = "Normal";
 
     [SerializeField] private Transform currentPattern = null;
     [SerializeField] private float noteSpeed = 0;
-<<<<<<< Updated upstream
-=======
-
-    public int monsterKillCount = 0;
-    public bool Note = true;
-    public bool ntbit = false;
->>>>>>> Stashed changes
     void Start()
     {
         RandomNotePattern();
@@ -45,17 +36,17 @@ public class NoteManager : MonoBehaviour
 
         GameObject selectedPattern;
 
-        if (monsterKillCount > 10 && (monsterKillCount % 10) < 3)
+        if (GameManager.Instance.monsterKillCount > 10 && (GameManager.Instance.monsterKillCount % 10) < 3)
         {
             monsterType = "Boss";
-            int randomIndex = Random.Range(0, bossNotePattern.Length);
-            selectedPattern = bossNotePattern[randomIndex];
+            int randomIndex = Random.Range(0, bossNotePattern.Length); // + 최적화 필요 로직
+            selectedPattern = bossNotePattern[randomIndex]; // + 최적화 필요 로직
         }
         else
         {
             monsterType = "Normal";
-            int randomIndex = Random.Range(0, normalNotePattern.Length);
-            selectedPattern = normalNotePattern[randomIndex];
+            int randomIndex = Random.Range(0, normalNotePattern.Length); // + 최적화 필요 로직
+            selectedPattern = normalNotePattern[randomIndex]; // + 최적화 필요 로직
         }
 
         // 현재위치에 노트 패턴을 생성하고 부모로 할당
@@ -74,17 +65,8 @@ public class NoteManager : MonoBehaviour
             }
         }
 
-        transform.position = new Vector3(-20, transform.position.y, transform.position.z);
-        ntbit = true;
+        transform.position = noteStartLocation.position;
 
         theMonsterController.MonsterSpawn(monsterType);
-    }
-
-    public void TurnStart(int turn)
-    {
-        if(turn == 0)
-            transform.position = noteStartLocation.position;
-        else
-            transform.position = turnStartLocation.position;
     }
 }
