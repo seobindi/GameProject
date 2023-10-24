@@ -5,7 +5,11 @@
 // This work is subject to the terms at http://dotween.demigiant.com/license.php
 
 
+<<<<<<< HEAD
 #if true // MODULE_MARKER
+=======
+#if false // MODULE_MARKER
+>>>>>>> seob
 using System;
 using System.Globalization;
 using System.Collections.Generic;

@@ -5,8 +5,9 @@ using DG.Tweening;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] private Transform Target;
+    [SerializeField] private MonsterController theMonsterController = null;
     [SerializeField] private Camera mainCamera;
+<<<<<<< Updated upstream
     [SerializeField] private float cameraSpeed = 0.0f;
     [SerializeField] private float shakeDuration = 0.1f; // 흔들림 지속 시간
     [SerializeField] private float shakeSpeed = 0.1f; // 흔들림의 세기
@@ -15,15 +16,25 @@ public class CameraManager : MonoBehaviour
     private double currentTime = 0d;
     public bool bossMode = false;
     private Vector3 targetPosition;
+<<<<<<< HEAD
     public GameObject lineUI;
     public GameObject line2UI;
     public GameObject line3UI;
     public GameObject line4UI;
     [SerializeField] private Animator anim;
+=======
+=======
+    //[SerializeField] private bool bossMode = false;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Transform[] cameraPosition_R = null;
+    [SerializeField] private Transform[] cameraPosition_L = null;
+>>>>>>> Stashed changes
+>>>>>>> seob
 
     //카메라 움직임
     void Update()
     {
+<<<<<<< Updated upstream
         currentTime += Time.deltaTime;
         transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
 
@@ -58,11 +69,22 @@ public class CameraManager : MonoBehaviour
         //    nowShakeDuration -= Time.deltaTime; // 흔들림 지속 시간 감소
         //}
         //else
+=======
+        //if(!bossMode) // 비보스 모드
         //{
-        //    transform.position = Vector3.Lerp(transform.position, Target.position, Time.deltaTime * CameraSpeed); // 이동 후 이동
+        //    targetPosition.y += yOffset;
+        //    transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * cameraSpeed); // 항상 이동
+        //    mainCamera.orthographicSize = 5.0f;
+        //}
+        //else // 보스 모드
+>>>>>>> Stashed changes
+        //{
+        //    transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * cameraSpeed);
+        //    mainCamera.orthographicSize = 7.0f;
         //}
     }
 
+<<<<<<< HEAD
     public void ShakeCamera(float duration, float strength, int caller)
     {
         
@@ -92,5 +114,73 @@ public class CameraManager : MonoBehaviour
                 else if (caller == 4)
                     line4UI.SetActive(false);
             });
+=======
+<<<<<<< Updated upstream
+    public void ShakeCamera()
+    {
+        nowShakeDuration = shakeDuration;
+=======
+    public void CameraMove(int turn)
+    {
+        if (turn == 0)
+        {
+            if(GameManager.Instance.NoteList.Count < 5)
+            {
+                if (theMonsterController.Right_dir)
+                {
+                    transform.DOMove(cameraPosition_R[GameManager.Instance.NoteList.Count - 1].position, 0.1f).SetEase(Ease.OutQuad);
+                }
+                else
+                {
+                    transform.DOMove(cameraPosition_L[GameManager.Instance.NoteList.Count - 1].position, 0.2f).SetEase(Ease.OutQuad);
+                }
+            }
+            else
+            {
+                if (theMonsterController.Right_dir)
+                {
+                    transform.DOMove(cameraPosition_R[GameManager.Instance.NoteList.Count - 2].position, 0.1f).SetEase(Ease.OutQuad);
+                }
+                else
+                {
+                    transform.DOMove(cameraPosition_L[GameManager.Instance.NoteList.Count - 2].position, 0.2f).SetEase(Ease.OutQuad);
+                }
+            }
+        }
+        else if (turn == 1)
+        {
+            if (GameManager.Instance.NoteList.Count < 5)
+            {
+                if (theMonsterController.Right_dir)
+                {
+                    transform.DOMove(cameraPosition_R[0].position, 0.2f).SetEase(Ease.OutQuad);
+                }
+                else
+                {
+                    transform.DOMove(cameraPosition_L[0].position, 0.2f).SetEase(Ease.OutQuad);
+                }
+            }
+            else
+            {
+                if (theMonsterController.Right_dir)
+                {
+                    transform.DOMove(cameraPosition_R[1].position, 0.2f).SetEase(Ease.OutQuad);
+                }
+                else
+                {
+                    transform.DOMove(cameraPosition_L[1].position, 0.2f).SetEase(Ease.OutQuad);
+                }
+            }
+        }
+
+
+        //transform.DOShakePosition(duration, new Vector3(strength, strength, 0), 20, 90, false)
+        //    .OnStart(() => {
+        //    })
+        //    .OnComplete(() => {
+        //    });
+
+>>>>>>> Stashed changes
+>>>>>>> seob
     }
 }

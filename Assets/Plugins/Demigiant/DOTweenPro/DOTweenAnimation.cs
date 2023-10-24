@@ -8,7 +8,11 @@ using UnityEngine;
 #if true // UI_MARKER
 using UnityEngine.UI;
 #endif
+<<<<<<< HEAD
 #if true // TEXTMESHPRO_MARKER
+=======
+#if false // TEXTMESHPRO_MARKER
+>>>>>>> seob
 using TMPro;
 #endif
 
@@ -355,7 +359,11 @@ namespace DG.Tweening
                     tween = ((tk2dBaseSprite)target).DOColor(endValueColor, duration);
                     break;
 #endif
+<<<<<<< HEAD
 #if true // TEXTMESHPRO_MARKER
+=======
+#if false // TEXTMESHPRO_MARKER
+>>>>>>> seob
                 case TargetType.TextMeshProUGUI:
                     tween = ((TextMeshProUGUI)target).DOColor(endValueColor, duration);
                     break;
@@ -398,7 +406,11 @@ namespace DG.Tweening
                     tween = ((tk2dBaseSprite)target).DOFade(endValueFloat, duration);
                     break;
 #endif
+<<<<<<< HEAD
 #if true // TEXTMESHPRO_MARKER
+=======
+#if false // TEXTMESHPRO_MARKER
+>>>>>>> seob
                 case TargetType.TextMeshProUGUI:
                     tween = ((TextMeshProUGUI)target).DOFade(endValueFloat, duration);
                     break;
@@ -423,7 +435,11 @@ namespace DG.Tweening
                     break;
                 }
 #endif
+<<<<<<< HEAD
 #if true // TEXTMESHPRO_MARKER
+=======
+#if false // TEXTMESHPRO_MARKER
+>>>>>>> seob
                 switch (targetType) {
                 case TargetType.TextMeshProUGUI:
                     tween = ((TextMeshProUGUI)target).DOText(endValueString, duration, optionalBool0, optionalScrambleMode, optionalString);
