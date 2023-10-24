@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] Sound[] sfx = null;
     [SerializeField] Sound[] bgm = null;
     [SerializeField] AudioSource bgmPlayer = null;
-    [SerializeField] AudioSource sfxPlayer = null;
+    [SerializeField] AudioSource[] sfxPlayer = null;
 
     //private void Awake()
     //{
@@ -49,8 +49,9 @@ public class AudioManager : MonoBehaviour
         {
             if (sfxName == sfx[i].name)
             {
-                if (!sfxPlayer.isPlaying)
+                for (int j = 0; j < sfxPlayer.Length; j++)
                 {
+<<<<<<< HEAD
 <<<<<<< HEAD
                     sfxPlayer.clip = sfx[i].clip;
                     sfxPlayer.Play();
@@ -97,6 +98,17 @@ public class AudioManager : MonoBehaviour
                 //}
 >>>>>>> Stashed changes
 >>>>>>> seob
+=======
+                    if (!sfxPlayer[j].isPlaying)
+                    {
+                        sfxPlayer[j].clip = sfx[i].clip;
+                        sfxPlayer[j].Play();
+                        return;
+                    }
+                }
+                Debug.Log("All audio is in use.");
+                return;
+>>>>>>> parent of 7066fbb (20231018)
             }
         }
         Debug.Log("The name could not be found.");
