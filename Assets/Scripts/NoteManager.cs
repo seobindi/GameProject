@@ -14,11 +14,10 @@ public class NoteManager : MonoBehaviour
 
     private Transform[] noteObjects = null;
     private string[] keyTag = { "Up", "Down", "Left", "Right" };
-    private string monsterType = "Normal";
+    public string monsterType = "Normal";
 
     [SerializeField] private Transform currentPattern = null;
     [SerializeField] private float noteSpeed = 0;
-<<<<<<< HEAD
 <<<<<<< HEAD
 
     public bool Note = true;
@@ -31,15 +30,13 @@ public class NoteManager : MonoBehaviour
     public bool ntbit = false;
 >>>>>>> Stashed changes
 >>>>>>> seob
-=======
->>>>>>> parent of 7066fbb (20231018)
     void Start()
     {
         RandomNotePattern();
     }
     void Update()
     {
-        transform.position += Vector3.right * noteSpeed * Time.deltaTime; // 노트 오른쪽으로 이동
+        if (Note) { transform.position += Vector3.right * noteSpeed * Time.deltaTime; } // 노트 오른쪽으로 이동
 
         if (transform.position.x >= noteEndLocation.position.x)
         {

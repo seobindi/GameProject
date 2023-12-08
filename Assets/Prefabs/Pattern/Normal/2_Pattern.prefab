@@ -62,15 +62,11 @@ Transform:
   m_GameObject: {fileID: 782538014419464708}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< HEAD:Assets/Prefabs/Pattern/Normal/2_Pattern.prefab
 <<<<<<< HEAD:Assets/Prefabs/Pattern/Normal/Pattern 2.prefab
   m_LocalPosition: {x: -2, y: 0, z: -1}
 =======
   m_LocalPosition: {x: -0.5, y: 0, z: -1}
 >>>>>>> seob:Assets/Prefabs/Pattern/Normal/2_Pattern.prefab
-=======
-  m_LocalPosition: {x: -1.5, y: 0, z: -1}
->>>>>>> parent of 7066fbb (20231018):Assets/Prefabs/Pattern/Normal/Pattern 3.prefab
   m_LocalScale: {x: 0.39999998, y: 0.45, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -462,15 +458,11 @@ Transform:
   m_GameObject: {fileID: 2271375852917817853}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< HEAD:Assets/Prefabs/Pattern/Normal/2_Pattern.prefab
 <<<<<<< HEAD:Assets/Prefabs/Pattern/Normal/Pattern 2.prefab
   m_LocalPosition: {x: -3, y: 0, z: -1}
 =======
   m_LocalPosition: {x: -2, y: 0, z: -1}
 >>>>>>> seob:Assets/Prefabs/Pattern/Normal/2_Pattern.prefab
-=======
-  m_LocalPosition: {x: -2.5, y: 0, z: -1}
->>>>>>> parent of 7066fbb (20231018):Assets/Prefabs/Pattern/Normal/Pattern 3.prefab
   m_LocalScale: {x: 0.39999998, y: 0.45, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

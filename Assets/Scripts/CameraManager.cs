@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraManager : MonoBehaviour
 {
@@ -9,14 +10,12 @@ public class CameraManager : MonoBehaviour
 <<<<<<< Updated upstream
     [SerializeField] private float cameraSpeed = 0.0f;
     [SerializeField] private float shakeDuration = 0.1f; // 흔들림 지속 시간
-    [SerializeField] private float shakeSpeed = 0.5f; // 흔들림의 세기
+    [SerializeField] private float shakeSpeed = 0.1f; // 흔들림의 세기
     [SerializeField] private float yOffset = 0.0f;
     [SerializeField] private int bpm = 0;
     private double currentTime = 0d;
-    private float nowShakeDuration = 0.0f;
     public bool bossMode = false;
     private Vector3 targetPosition;
-<<<<<<< HEAD
 <<<<<<< HEAD
     public GameObject lineUI;
     public GameObject line2UI;
@@ -31,8 +30,6 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private Transform[] cameraPosition_L = null;
 >>>>>>> Stashed changes
 >>>>>>> seob
-=======
->>>>>>> parent of 7066fbb (20231018)
 
     //카메라 움직임
     void Update()
@@ -56,17 +53,21 @@ public class CameraManager : MonoBehaviour
 
         if (currentTime >= 60d / bpm) // 60/bpm = 한 비트당 시간 (120bpm이라면 한 비트당 소요 시간은 0.5초)
         {
-            ShakeCamera();
+            if (!Input.anyKeyDown)
+            {
+                anim.SetTrigger("Beat");
+                ShakeCamera(shakeDuration, shakeSpeed, 1);
+            }
             currentTime -= 60d / bpm;
         }
 
         //카메라 흔들림
-        if (nowShakeDuration > 0)
-        {
-            Vector3 shakeOffset = Random.insideUnitSphere * shakeSpeed; // 랜덤한 위치 벡터 생성
-            transform.localPosition = transform.position + shakeOffset; // 흔들림 효과로 카메라 위치 이동
-            nowShakeDuration -= Time.deltaTime; // 흔들림 지속 시간 감소
-        }
+        //if (nowShakeDuration > 0)
+        //{
+        //    Vector3 shakeOffset = Random.insideUnitSphere * shakeSpeed; // 랜덤한 위치 벡터 생성
+        //    transform.localPosition = transform.position + shakeOffset; // 흔들림 효과로 카메라 위치 이동
+        //    nowShakeDuration -= Time.deltaTime; // 흔들림 지속 시간 감소
+        //}
         //else
 =======
         //if(!bossMode) // 비보스 모드
@@ -83,7 +84,6 @@ public class CameraManager : MonoBehaviour
         //}
     }
 
-<<<<<<< HEAD
 <<<<<<< HEAD
     public void ShakeCamera(float duration, float strength, int caller)
     {
@@ -182,10 +182,5 @@ public class CameraManager : MonoBehaviour
 
 >>>>>>> Stashed changes
 >>>>>>> seob
-=======
-    public void ShakeCamera()
-    {
-        nowShakeDuration = shakeDuration;
->>>>>>> parent of 7066fbb (20231018)
     }
 }
